@@ -1,7 +1,7 @@
 <label for="key" >cryption key</label>
 <input type ="number" name = "key" #k/>
 <label for="message" type = "text">message</label>
-<input  (keyup)="$event.keyCode == 13 && sendMessage(message)" name="message" #message/>
+<input  (keyup)="$event.keyCode == 13 && sendMessage(message,k)" name="message" #message/>
 <button (click)="sendMessage(message,k)">Send Message</button>
 
 <div *ngFor = "let message of messageList">
