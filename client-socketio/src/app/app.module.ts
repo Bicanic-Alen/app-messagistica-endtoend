@@ -5,8 +5,9 @@ import { AppComponent } from './app.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { FormsModule } from '@angular/forms';
 import { SocketService } from './socket.service';
- 
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {/*transport : ['websocket'], withCredentials:false*/} };
+import { CesarService } from './cesar.service';
+
+const config: SocketIoConfig = { url: 'https://3000-pink-rabbit-7khddyx9.ws-eu03.gitpod.io/', options: {/*transport : ['websocket'], withCredentials:false*/} };
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {/*trans
     SocketIoModule.forRoot(config),
     FormsModule
   ],
-  providers: [SocketService],
+  providers: [SocketService, CesarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

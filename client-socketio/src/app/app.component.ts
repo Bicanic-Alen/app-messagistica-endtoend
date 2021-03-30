@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SocketService } from './socket.service';
+import { CesarService } from './cesar.service';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +10,13 @@ import { SocketService } from './socket.service';
 export class AppComponent {
   messageList:  string[] = [];
 
-  constructor(private socketService: SocketService) {
+  constructor(private socketService: SocketService, private cesarService: CesarService) {
   }
 
-  sendMessage(message: HTMLInputElement) {
-    this.socketService.sendMessage(message.value);
-    
-    console.log("sent: " + message.value)
+   sendMessage(message: HTMLInputElement) {
+    let encoded = this.cesarService.encode(message.value, 10);
+    this.socketService.sendMessage(encoded);
+    //console.log("sent: " + message.value)
     message.value="";
   }
   ngOnInit() {
