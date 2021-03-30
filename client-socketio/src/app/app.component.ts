@@ -9,12 +9,14 @@ import { CesarService } from './cesar.service';
 })
 export class AppComponent {
   messageList:  string[] = [];
+  key : number;
 
   constructor(private socketService: SocketService, private cesarService: CesarService) {
   }
 
-   sendMessage(message: HTMLInputElement) {
-    let encoded = this.cesarService.encode(message.value, 10);
+   sendMessage(message: HTMLInputElement, k: HTMLInputElement) {
+    let encoded = this.cesarService.encode(message.value, k.valueAsNumber);
+    this.key = k.valueAsNumber;
     this.socketService.sendMessage(encoded);
     //console.log("sent: " + message.value)
     message.value="";
@@ -22,7 +24,7 @@ export class AppComponent {
   ngOnInit() {
     this.socketService.getMessage()
       .subscribe((message: string) => {
-        this.messageList.push(message);
+        this.messageList.push("messaggio criptato: "+message+" messaggio decriptato: "+ this.cesarService.decode(message, this.key));
         console.log("messagereceived: " + message)
       });
   }
